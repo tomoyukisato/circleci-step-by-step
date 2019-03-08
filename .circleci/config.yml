@@ -16,12 +16,12 @@ jobs:
           command: dockerize -wait tcp://127.0.0.1:5432 -timeout 120s
       - run: mvn dependency:go-offline
       - restore_cache:
-          key: circlci-demo--java-spring-{{ chechsum "pom.xml" }}
+          key: circlci-demo--java-spring-{{ checksum "pom.xml" }}
       - run: mvn package
-      - save_chache:
+      - save_cache:
           paths:
               - ~/.m2
-          key: circleci-demo-java-spring-{{ chechsum "pom.xml" }}
+          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
       - store_test_results:
           path: target/surefire-reports
       - store_artifacts:
